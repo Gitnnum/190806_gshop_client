@@ -10,9 +10,10 @@ export default {
         const result = await reqAddress(latitude, longitude)
         commit(RECEIVE_ADDRESS, result.data)
     },
-    async getCategorys ({commit}) {
+    async getCategorys ({commit},callback) {
         const result = await reqCategorys()
         commit(RECEIVE_CATEGORYS, result.data)
+        typeof callback === 'function' && callback()
     },
     async getShops ({commit, state}) {
         const {latitude, longitude} = state
