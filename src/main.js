@@ -1,8 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
-
-Vue.config.productionTip = false
-
+import router from './router'
+import Header from './components/Header/Header'
+import './api'
+Vue.component('Header', Header)
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+    el: '#app',
+    components: {
+        App
+    },
+    template: '<App/>',
+    // render: h => h(App),
+    router
+})
