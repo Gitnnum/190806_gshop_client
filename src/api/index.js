@@ -3,10 +3,10 @@ import ajax from './ajax'
 /* 
 1、 根据经纬度获取位置详情
 */
-export const reqAddress = (latitude,longitude) => ajax.get(`/position/:${latitude},${longitude}`)
+export const reqAddress = (latitude,longitude) => ajax.get(`/position/${latitude},${longitude}`)
 
 //2.获取食品分类列表
-export const reqCategotys = () => ajax('/index_category')
+export const reqCategorys = () => ajax('/index_category')
 
 // 3、根据经纬度获取商铺列表
 export const reqshops = ({latitude,longitude}) => ajax(
