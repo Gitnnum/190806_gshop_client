@@ -12,7 +12,7 @@ axios.interceptors.request.use(config => {
     // 如果需要token
     if(config.headers.needToken){
         // 先判断状态里面有没有token
-        const token = store.state.token
+        const token = store.state.user.token
         if(!token){// 如果现实的情况是没有token  直接进入失败的流程
             let error = new Error('没有token，请先登录')
             error.status = 401 // 定义添加一个没有权限的错误状态码
