@@ -5,6 +5,7 @@ import Header from './components/Header/Header'
 import store from './store'
 import Star from './components/Star/Star.vue'
 import {Button} from 'mint-ui'
+import './mock/mock-server'
 Vue.component('Header', Header)
 Vue.component('Star', Star)
 Vue.component(Button.name, Button)

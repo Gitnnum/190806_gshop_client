@@ -63,6 +63,13 @@ export const reqAutoLogin = () => ajax({
       needToken: true
     }
   })
+// 获取商家商品信息
+export const reqGoods = () => ajax('/shop/goods')
+// 获取商家评论信息
+export const reqRatings = () => ajax('/shop/ratings')
+// 获取商家信息
+export const reqInfo = () => ajax('/shop/info')
+
 
 // reqAddress('116.36867', '40.10038').then((result) => {
 //     console.log('result', result)

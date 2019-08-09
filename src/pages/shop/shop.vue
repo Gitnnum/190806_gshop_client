@@ -21,7 +21,12 @@ import ShopHeader from '../../components/ShopHeader/ShopHeader'
   export default {
     components: {
       ShopHeader
-    }
+    },
+    mounted() {
+      this.$store.dispatch('getGoods')
+      this.$store.dispatch('getRatings')
+      this.$store.dispatch('getInfo')
+    },
   }
 </script>
 

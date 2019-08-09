@@ -2,7 +2,10 @@ import {
     reqAddress,
     reqCategorys,
     reqshops,
-    reqAutoLogin
+    reqAutoLogin,
+    reqGoods,
+    reqRatings,
+    reqInfo
 } from '../api'
 import {
     RECEIVE_ADDRESS, 
@@ -11,7 +14,10 @@ import {
     RECEIVE_USER,
     RESET_USER,
     RECEIVE_TOKEN,
-    RESET_TOKEN
+    RESET_TOKEN,
+    RECEIVE_GOODS,
+    RECEIVE_RATINGS,
+    RECEIVE_INFO
     } from './mutations-types'
 export default {
     async getAddress ({commit, state}) {
@@ -29,6 +35,8 @@ export default {
         const result = await reqshops(latitude, {latitude, longitude})
         commit(RECEIVE_SHOPS, result.data)
     },
+
+
 
     saveUser ({commit}, user) {
         const token = user.token
@@ -50,5 +58,28 @@ export default {
                 commit(RECEIVE_USER, user)
             }
         } 
-    }
+    },
+
+
+    async getGoods ({commit}) {
+        const result = await reqGoods()
+        if(result.code === 0){
+            const goods = result.data
+            commit(RECEIVE_GOODS,goods)
+        }
+    },
+    async getRatings ({commit}) {
+        const result = await reqRatings()
+        if(result.code === 0){
+            const ratings = result.data
+            commit(RECEIVE_RATINGS,ratings)
+        }
+    },
+    async getInfo ({commit}) {
+        const result = await reqInfo()
+        if(result.code === 0){
+            const info = result.data
+            commit(RECEIVE_INFO,info)
+        }
+    },
 }

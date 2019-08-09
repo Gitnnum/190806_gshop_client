@@ -4,6 +4,11 @@ export default {
 	address: {},
 	categorys: [],
 	shops: [],
+
 	user: {},
-	token: localStorage.getItem('token_key')
+	token: localStorage.getItem('token_key'),
+
+	goods: [],
+	ratings: [],
+	info: {}
 }
