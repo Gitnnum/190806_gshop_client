@@ -63,11 +63,7 @@
 
 <script type="text/ecmascript-6">
 	import {mapState} from 'vuex'
-	import Star from '../Star/Star.vue'
   export default {
-		components: {
-			Star
-		},
 		computed: {
 			...mapState(['shops'])
 		},

@@ -6,7 +6,11 @@ import ajax from './ajax'
 export const reqAddress = (latitude,longitude) => ajax.get(`/position/${latitude},${longitude}`)
 
 //2.获取食品分类列表
-export const reqCategorys = () => ajax('/index_category')
+export const reqCategorys = () => ajax.get('/index_category',{
+    headers: {
+        needToken: true
+    }
+})
 
 // 3、根据经纬度获取商铺列表
 export const reqshops = ({latitude,longitude}) => ajax(
@@ -15,6 +19,9 @@ export const reqshops = ({latitude,longitude}) => ajax(
         params: {
             latitude,
             longitude
+        },
+        headers: {
+            needToken: true
         }
     }
 )
@@ -28,11 +35,8 @@ export const reqSearchShops = ({latitude,longitude},keyword)=> ajax({
     }
 })
 
-//## 5、获取一次性验证码
-export const reqCaptcha = () =>ajax.get('/captcha')
-
 //6、用户名密码登陆
-export const reqLoginPwd = (name,pwd) => ajax.post('/login_pwd',{name,pwd})
+export const reqLoginPwd = (name,pwd,captcha) => ajax.post('/login_pwd',{name,pwd,captcha})
 
 // 7、发送短信验证码
 export const reqLoginSendcode = (phone) => ajax({
@@ -45,18 +49,20 @@ export const reqLoginSendcode = (phone) => ajax({
 // 8、手机号验证码登陆
 export const reqLoginSms = (phone,code) => ajax({
     method: 'POST',
-    url: '/login_sm',
+    url: '/login_sms',
     data: {
         phone,
         code
     }
 })
 
-// 9、根据会话获取用户信息
-export const reqUserInfo = () => ajax.get('/userinfo')
-
-//10、用户登出
-export const reqLoginOut = () => ajax.get('/logout')
+// 9、根据token进行自动登陆
+export const reqAutoLogin = () => ajax({
+    url: '/auto_login',
+    headers: {
+      needToken: true
+    }
+  })
 
 // reqAddress('116.36867', '40.10038').then((result) => {
 //     console.log('result', result)
