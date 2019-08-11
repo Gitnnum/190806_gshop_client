@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import {
     reqGoods,
     reqRatings,
@@ -6,12 +7,16 @@ import {
 import {
     RECEIVE_GOODS,
     RECEIVE_RATINGS,
-    RECEIVE_INFO
+    RECEIVE_INFO,
+    ADD_FOOD_COUNT,
+    REDUCE_FOOD_COUNT,
+    CLEAR_CART
     } from '../mutations-types'
 const state = {
     goods: [],
 	ratings: [],
-	info: {}
+    info: {},
+    cartFoods: []
 }
 const mutations= {
     [RECEIVE_GOODS] (state, goods) {
@@ -22,6 +27,27 @@ const mutations= {
     },
     [RECEIVE_INFO] (state, info) {
         state.info = info
+    },
+    [ADD_FOOD_COUNT] (state, food) {
+        if(food.count){
+            food.count++
+        }else{
+            // food.count = 1  //此时新添加的属性是没有数据绑定的
+            Vue.set(food, "count", 1)
+            state.cartFoods.push(food)
+        }
+    },
+    [REDUCE_FOOD_COUNT] (state, food) {
+        if(food.count > 0){
+            food.count--
+            if(food.count===0){
+                state.cartFoods.splice(state.cartFoods.indexOf(food),1)
+            }
+        }
+    },
+    [CLEAR_CART] (state) {
+        state.cartFoods.map(food => food.count = 0)
+        state.cartFoods = []
     }
 }
 const actions = {
@@ -45,10 +71,30 @@ const actions = {
             const info = result.data
             commit(RECEIVE_INFO,info)
         }
+    },
+    updateFoodCount ({commit}, {isAdd, food}) {
+        if(isAdd){
+            commit(ADD_FOOD_COUNT,food)
+        }else{
+            commit(REDUCE_FOOD_COUNT,food)
+        }
+    },
+    clearCart ({commit}) {
+        commit(CLEAR_CART)
     }
+
 }
 const getters = {
-    
+    totalCount (state) {
+        return state.cartFoods.reduce((pre, item) => pre + item.count, 0)
+        // return state.cartFoods.length
+    },
+    totalMoney (state) {
+        return state.cartFoods.reduce((pre,item) => {
+            pre += item.price * item.count
+            return pre
+        },0)
+    }
 }
 
 

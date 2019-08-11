@@ -10,5 +10,8 @@ export const RESET_TOKEN = 'reset-token'
 export const RECEIVE_GOODS = 'receive-goods'
 export const RECEIVE_RATINGS = 'receive-ratings'
 export const RECEIVE_INFO = 'receive-info'
+export const ADD_FOOD_COUNT = 'add-food-count'
+export const REDUCE_FOOD_COUNT = 'reduce-food-count'
+export const CLEAR_CART = 'clear-cart'
 
 // export const RECEIVE_ADDRESS = 'receive-address'
