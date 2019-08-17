@@ -94,6 +94,12 @@ const getters = {
             pre += item.price * item.count
             return pre
         },0)
+    },
+    totalRatingsCount (state) {
+        return state.ratings.length
+    },
+    positiveRatingsCount (state) {
+        return state.ratings.reduce((pre,item) => pre + (item.rateType===0 ? 1: 0),0)
     }
 }
 

@@ -6,12 +6,19 @@ import store from './store'
 import Star from './components/Star/Star.vue'
 import CartControl from './components/CartControl/CartControl.vue'
 import {Button} from 'mint-ui'
+import VueLazyload from 'vue-lazyload'
+import loading from './common/images/loading.gif'
+import './filters'
 import './mock/mock-server'
 Vue.component('Header', Header)
 Vue.component('Star', Star)
 Vue.component(Button.name, Button)
 Vue.component('CartControl', CartControl)
+Vue.use(VueLazyload, {
+    loading,
+  })
 Vue.config.productionTip = false
+Vue.prototype.$bus = new Vue()
 new Vue({
     el: '#app',
     // components: {
